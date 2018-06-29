@@ -1,5 +1,6 @@
-package limitation;
+package limitation.example;
 
+import limitation.print.Print;
 import org.springframework.stereotype.Component;
 
 /**
