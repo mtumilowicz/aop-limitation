@@ -57,18 +57,64 @@ aspect contracts. In `Spring AOP` we have two types of proxies:
 * **Pointcut** - a predicate that matches join points. Advice is associated 
 with a pointcut expression and runs at any join point matched by the pointcut 
 (for example, the execution of a method with a certain name). 
-You can think of a pointcut as matching the execution of methods on Spring beans.
+You can think of a pointcut as matching the execution of methods on Spring beans.  
+In simple words whatever you specify inside advice is a pointcut 
+expression. This can be extracted out into a separate method using 
+`@Pointcut` annotation for better understanding, modularity and better control.
+    * execution - for matching method execution join points, 
+    this is the primary pointcut designator you will use when working with 
+    `Spring AOP`.
+    
+    * within - join points within certain types 
+    
+    * this - join points where the bean reference 
+    (`Spring AOP` proxy) is an instance of the given type
+    
+    * target - join points where the target object 
+    (application object being proxied) is an instance of the given type
+    
+    * args - join points where the arguments are 
+    instances of the given types
+    
+    * @target - join points where the class of the 
+    executing object has an annotation of the given type
+    
+    * @args - join points where the runtime type of the 
+    actual arguments passed have annotations of the given type(s)
+    
+    * @within - join points within types that have the 
+    given annotation (the execution of methods declared in types with the 
+    given annotation)
+    
+    * @annotation - join points where the subject of the 
+    join point (method being executed in `Spring AOP`) has the given annotation
 
 * **Weaving**: linking aspects with other application types or objects to create 
 an advised object. `Spring AOP` performs weaving at runtime.
 
 # manual
-* Declaring an aspect:
-any bean defined in your application context with the @Aspect annotation will be 
+* Declaring an aspect  
+Any bean defined in your application context with the `@Aspect` annotation will be 
 automatically detected by Spring.
+    ```
+    @Aspect
+    public class PrintAspect
+    ```
 
-* Declaring a pointcut: 
+* Declaring a pointcut  
 A pointcut declaration has two parts: 
-    * a signature comprising a name and any parameters
-    * pointcut expression that determines exactly which method 
+    * A signature comprising a name and any parameters.
+    * Pointcut expression that determines exactly which method 
     executions we are interested in.
+    ```
+    @Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
+    public void requestMapping() {}
+
+    @Pointcut("within(controller.*)")
+    public void controller() {}
+
+    @Around("requestMapping() && myController()")
+    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
+      ...............
+   }      
+    ```
