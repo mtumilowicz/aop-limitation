@@ -172,7 +172,7 @@ annotation `@Print`
     and we ask a question - what will be printed to console 
     when we invoke method `all()` on the injected object:
     
-* **ExampleTest**
+* **ExampleTest**  
     We inject `Example` (note that injected is proxy)
     ```
     @Autowired
