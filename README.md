@@ -131,6 +131,7 @@ proxies should always be designed through public signatures.
 
 # project structure
 * **Print** - annotation
+
 * **PrintAspect** - aspect that wraps `@Before` and `@After` 
 annotation `@Print`
     ```
@@ -146,6 +147,7 @@ annotation `@Print`
         System.out.println();
     }    
     ```
+    
 * **Example** - `@Component` that tests `PrintAspect`, we have three methods:
     ```
     @Print
@@ -168,7 +170,8 @@ annotation `@Print`
     }    
     ```
     and we ask a question - what will be printed to console 
-    when we invoke methods:
+    when we invoke method `all()` on the injected object:
+    
 * **ExampleTest**
     We inject `Example` (note that injected is proxy)
     ```
