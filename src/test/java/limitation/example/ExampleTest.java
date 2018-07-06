@@ -15,34 +15,17 @@ public class ExampleTest {
 
     @Autowired
     Example example;
-
-    /**
-     * Using AOP - before method
-     * second
-     * Using AOP - after method
-     */
+    
     @Test
     public void printOverFirst() {
         example.first();
     }
-
-    /**
-     * Using AOP - before method
-     * first
-     * Using AOP - after method
-     */
+    
     @Test
     public void printOverSecond() {
         example.second();
     }
-
-    /**
-     * Using AOP - before method
-     * all
-     * first
-     * second
-     * Using AOP - after method
-     */
+    
     @Test
     public void printOverAll() {
         example.all();

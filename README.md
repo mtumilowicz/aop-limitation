@@ -121,3 +121,98 @@ A pointcut declaration has two parts:
       ...............
    }      
     ```
+# project description
+Due to the proxy-based nature of Spring’s AOP framework, calls within the 
+target object are by definition not intercepted. For JDK proxies, only 
+public interface method calls on the proxy can be intercepted. With CGLIB, 
+public and protected method calls on the proxy will be intercepted, and even 
+package-visible methods if necessary. However, common interactions through 
+proxies should always be designed through public signatures.
+
+# project structure
+* **Print** - annotation
+* **PrintAspect** - aspect that wraps `@Before` and `@After` 
+annotation `@Print`
+    ```
+    @Before("@annotation(Print)")
+    public void before() {
+        System.out.println("Using AOP - before method");
+    }    
+    ```
+    ```
+    @After("@annotation(Print)")
+    public void after() {
+        System.out.println("Using AOP - after method");
+        System.out.println();
+    }    
+    ```
+* **Example** - `@Component` that tests `PrintAspect`, we have three methods:
+    ```
+    @Print
+    void first() {
+        System.out.println("first");
+    }    
+    ```
+    ```
+    @Print
+    void second() {
+        System.out.println("second");
+    }    
+    ```
+    ```
+    @Print
+    void all() {
+        System.out.println("all");
+        first();
+        second();
+    }    
+    ```
+    and we ask a question - what will be printed to console 
+    when we invoke methods:
+* **ExampleTest**
+    We inject example (injected is proxy)
+    ```
+    @Autowired
+    Example example;
+    ```
+    * test of the `first()` method
+        ```
+        @Test
+        public void printOverFirst() {
+            example.first();
+        }    
+        ```
+        produces:
+        ```
+        Using AOP - before method
+        first
+        Using AOP - after method
+        ```
+    * test of the `second()` method
+        ```
+        @Test
+        public void printOverSecond() {
+            example.second();
+        }    
+        ```
+        produces:
+        ```
+        Using AOP - before method
+        second
+        Using AOP - after method
+        ```
+    * test of the `all()` method
+        ```
+        @Test
+        public void printOverAll() {
+            example.all();
+        }    
+        ```
+        produces:
+        ```
+        Using AOP - before method
+        all
+        first
+        second
+        Using AOP - after method
+        ```
