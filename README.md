@@ -193,6 +193,6 @@ annotation `@Print`
         second
         Using AOP - after method
         ```
-        which could be counter-intuitive at a glance, but note that
+        which could be counter-intuitive at first, but note that
         in `all()` method we refer to `first()` and `second()` that
         are invoked not on the proxy but on the target.
