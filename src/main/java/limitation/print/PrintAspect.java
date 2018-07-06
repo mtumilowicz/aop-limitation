@@ -1,8 +1,8 @@
 package limitation.print;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -11,10 +11,13 @@ import org.springframework.context.annotation.Configuration;
 @Aspect
 @Configuration
 public class PrintAspect {
-    @Around("@annotation(Print)")
-    public void xxx(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Before("@annotation(Print)")
+    public void before() {
         System.out.println("Using AOP - before method");
-        joinPoint.proceed();
+    }
+
+    @After("@annotation(Print)")
+    public void after() {
         System.out.println("Using AOP - after method");
         System.out.println();
     }
