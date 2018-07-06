@@ -122,9 +122,9 @@ A pointcut declaration has two parts:
    }      
     ```
 # project description
-Due to the proxy-based nature of Spring’s AOP framework, calls within the 
-target object are by definition not intercepted. For JDK proxies, only 
-public interface method calls on the proxy can be intercepted. With CGLIB, 
+Due to the proxy-based nature of `Spring’s AOP` framework, calls within the 
+target object are by definition not intercepted. For `JDK` proxies, only 
+public interface method calls on the proxy can be intercepted. With `CGLIB`, 
 public and protected method calls on the proxy will be intercepted, and even 
 package-visible methods if necessary. However, common interactions through 
 proxies should always be designed through public signatures.
@@ -216,3 +216,6 @@ annotation `@Print`
         second
         Using AOP - after method
         ```
+        which could be counter-intuitive at a glance, but note that
+        in `all()` method we refer to `first()` and `second()` that
+        are invoked not on the proxy but on the target.
