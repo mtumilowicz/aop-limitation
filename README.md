@@ -170,37 +170,11 @@ annotation `@Print`
     and we ask a question - what will be printed to console 
     when we invoke methods:
 * **ExampleTest**
-    We inject example (injected is proxy)
+    We inject `Example` (note that injected is proxy)
     ```
     @Autowired
     Example example;
     ```
-    * test of the `first()` method
-        ```
-        @Test
-        public void printOverFirst() {
-            example.first();
-        }    
-        ```
-        produces:
-        ```
-        Using AOP - before method
-        first
-        Using AOP - after method
-        ```
-    * test of the `second()` method
-        ```
-        @Test
-        public void printOverSecond() {
-            example.second();
-        }    
-        ```
-        produces:
-        ```
-        Using AOP - before method
-        second
-        Using AOP - after method
-        ```
     * test of the `all()` method
         ```
         @Test
