@@ -148,7 +148,7 @@ annotation `@Print`
     }    
     ```
     
-* **Example** - `@Component` that tests `PrintAspect`, we have three methods:
+* **Example** - `@Component` that uses `@Print`:
     ```
     @Print
     void first() {
