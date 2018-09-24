@@ -6,7 +6,7 @@ _Reference_: [Spring AOP documentation](https://docs.spring.io/spring/docs/curre
 _Reference_: [Implementing AOP using Spring Boot](http://www.baeldung.com/spring-aop-annotation)  
 _Reference_: [AOP Proxies](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#aop-understanding-aop-proxies)  
 
-#preface
+# preface
 `AOP` is used in the `Spring Framework` to:
 * Provide declarative enterprise services - the most important is declarative 
 transaction management.
@@ -49,7 +49,7 @@ with the `@Aspect` annotation.
     * **Note that** using the most specific advice type provides a simpler programming 
     model with less potential for errors.  
     For example, you do not need to invoke the `proceed()` method on the 
-    `JoinPoint` used for around advice, and hence cannot fail to invoke it.
+    `JoinPoint` used for Around advice, and hence cannot fail to invoke it.
 
 * **Proxy** - an object created in order to implement the aspect contracts. 
 In `Spring AOP` we have two types of proxies:
